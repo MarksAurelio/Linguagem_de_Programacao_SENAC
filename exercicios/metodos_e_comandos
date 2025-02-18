@@ -1,0 +1,41 @@
+texto = "Olá, Mundo!"
+
+# upper(): converte todas as letras para maiúsculas
+print(texto.upper())
+
+# lower(): converte todas as letras para minúsculas
+print(texto.lower())
+
+# capitalize(): converte a primeira letra para maiúscula e o restante para minúscula
+print(texto.capitalize())
+
+# strip(): remove espaços em branco do início e do final da string
+print(texto.strip())
+
+# replace(): substitui parte da string por outra
+print(texto.replace("Mundo", "Planeta"))
+
+# sep: não é um método de string, é usado para definir o separador em print
+print("Python", "é", "uma", "linguagem", "fantástica", sep="-")
+
+# count(): conta quantas vezes um determinado elemento aparece na string
+print(texto.count("o"))
+
+# join(): junta os elementos de uma lista em uma única string usando um separador
+lista = ["maçã", "banana", "laranja"]
+print(", ".join(lista))
+
+# split(): divide a string em uma lista de substrings usando um separador
+print(texto.split(", "))
+
+# len(): retorna o comprimento da string
+print(len(texto))
+
+# type(): retorna o tipo de dado de uma variável
+print(type(texto))
+
+#round()
+dividendo = 10
+divisor = 3
+resultado = dividendo / divisor
+resultado_arredondado = round(resultado, 2)

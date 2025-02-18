@@ -14,6 +14,6 @@ for i in range(1, 11):
 
 numero = int(input('Digite um número: '))    
 if numero %2 == 0:
-    print('Número par')
+    print('Número par!')
 else:
-    print('Número ímpar')
+    print('Número ímpar!')
