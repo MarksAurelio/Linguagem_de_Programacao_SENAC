@@ -9,13 +9,13 @@ else:
 
 # ou
 
-senha_correta = 1234
+senha_cadastrada = str(input('Cadastre uma senha: \n'))
 senha_digitada = "" 
 
-while senha_correta != senha_digitada:
-    senha_digitada = int(input('Digite a senha: \n'))
+while senha_cadastrada != senha_digitada:
+    senha_digitada = str(input('Digite a senha: \n'))
 
-if senha_correta  != senha_digitada:
+if senha_cadastrada  != senha_digitada:
     print('Senha incorreta!')
 else:
     print('Senha correta!')
