@@ -15,17 +15,17 @@ lista.append(elemento) """
 while True:
     numeros = input('Digite uma sequência de números inteiros (separado por espaços): ').split()
 
-    def numero_perfeito():
+    def numero_perfeito(numeros):
         try:
-            lista = [int(i) for i in range(1,numeros) if numeros % i == 0]
-            lista_perfeitos = []
+            lista = [int(i) for i in range(1,int(numeros)) if int(numeros) % i == 0]
+            
             return sum(lista) == numeros
-        for 
-        if numero_perfeito():
-                
-                print(lista_perfeitos.append(lista))
-            return lista_perfeitos
         except ValueError:
             print('Opção inválida.')
             return 0
+    lista_perfeitos = []
+    for numero in numeros:
+        if numero_perfeito(numeros):
+            lista_perfeitos.append(numero)
+        
     print(f'Os números perfeitos encontrados na lista são: {numero_perfeito()}')
