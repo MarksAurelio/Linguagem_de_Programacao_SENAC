@@ -12,20 +12,18 @@ Exiba os números perfeitos encontrados na lista.
 Em Python, append() é um método usado em listas para adicionar um novo elemento ao final da lista. 
 Ele modifica a lista original e não retorna um novo objeto.  
 lista.append(elemento) """
+def numero_perfeito(numero):
+    try:
+        lista = [i for i in range(1, int(numero)) if int(numero) % i == 0]
+        return sum(lista) == int(numero)
+    except ValueError:
+        print('Opção inválida.')
+        return False
 while True:
     numeros = input('Digite uma sequência de números inteiros (separado por espaços): ').split()
-
-    def numero_perfeito(numeros):
-        try:
-            lista = [int(i) for i in range(1,int(numeros)) if int(numeros) % i == 0]
-            
-            return sum(lista) == numeros
-        except ValueError:
-            print('Opção inválida.')
-            return 0
     lista_perfeitos = []
     for numero in numeros:
-        if numero_perfeito(numeros):
+        if numero_perfeito(numero):
             lista_perfeitos.append(numero)
         
-    print(f'Os números perfeitos encontrados na lista são: {numero_perfeito()}')
+    print(f'Os números perfeitos encontrados na lista são: {lista_perfeitos}')
