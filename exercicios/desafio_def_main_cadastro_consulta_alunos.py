@@ -61,7 +61,7 @@ def menu():
     return pergunta
 
 def cadastrar_aluno():
-    nome = input('Qual o nome a ser cadastrado: ')
+    nome = input('Qual o nome a ser cadastrado: ').capitalize()
     cadastro_de_alunos.append(nome)
     print('Cadastro do nome realizado com sucesso.')
 
@@ -70,18 +70,18 @@ def listar_alunos():
         print('Nesta lista não há o aluno citado.')
     else:
         print('Lista:')
-        for i, nome in enumerate(cadastro_de_alunos):
+        for i, nome in enumerate(cadastro_de_alunos, 1):
             print(f'{i} - {nome}')
 
 def buscar_aluno():
-    nome = input('Qual o nome para ser localizado? ')
+    nome = input('Qual o nome para ser localizado? ').capitalize()
     if nome in cadastro_de_alunos:
         print('Nome localizado.')
     else:
         print('Nome não localizado.')
 
 def remover_aluno():
-    nome = input('Qual o nome para exclusão: ')
+    nome = input('Qual o nome para exclusão: ').capitalize()
     if nome in cadastro_de_alunos:
         cadastro_de_alunos.remove(nome)
         print('Nome excluído com sucesso.')
@@ -106,11 +106,12 @@ while True:
         remover_aluno()
     elif pergunta == 5:
         sair()
+    elif pergunta == 6:
+        print("\n" * 50)
     else:
         print('Esta opção não foi localizada. Por favor escolha outra opção.')
 
-    para_continuar = input('Gostaria de realizar outra operação? (s/n): ')
-    if para_continuar.lower() != 's':
+    para_continuar = input('Gostaria de realizar outra operação? (s/n): ').lower()
+    if para_continuar != 's':
         break
-        
         
