@@ -12,17 +12,17 @@ class Agenda:
     def listar_contatos(self):
         print(f'A lista de contato {self.nome}')
         for contato in self.lista:
-            print(f'- Nome: {contato["nome"]}, Telefone: {contato["telefone"]}')
+            print(f'- Nome: {contato["nome"]}\n- Telefone: {contato["telefone"]}')
 
 agenda = Agenda('Minha Agenda')
 
 while True:
-    nome = input('Digite um nome (ou sair para finalizar): ')
+    nome = input('Digite um nome (ou sair para finalizar): ').capitalize()
     
     if nome.lower() == 'sair':
         break
-    telefone = input('Digite o telefone: ')  
-    contato = {'nome': nome, 'telefone': telefone} 
+    telefone = input('Digite o telefone (00-0000 00 00): ')  
+    contato = {'nome': nome, 'telefone': telefone}
     agenda.adicionar_contato(contato)
 
 agenda.listar_contatos()
