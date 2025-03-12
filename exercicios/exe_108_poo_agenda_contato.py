@@ -44,7 +44,7 @@ class Contato:
         print(self.lista)
 
     def listar_contatos(self):
-        print(f'{self.nome}')
+        print(f'{self.nome}:')
         for contato in self.lista:
             print(f'- Nome: {contato["nome"]}\n- Telefone: {contato["telefone"]}')
 
