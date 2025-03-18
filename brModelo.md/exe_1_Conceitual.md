@@ -3,4 +3,4 @@
 
 Após a conclusão, desenvolva o Diagrama Entidade Relacionamento
 
-<img src="brModelo.md\Conceitual_1.png">
+![Alt text](Conceitual_1.png)
