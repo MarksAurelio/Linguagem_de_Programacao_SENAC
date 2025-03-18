@@ -24,7 +24,6 @@ class Animal:
     def informacoes(self):
         return f'Espécie: {self.__especie}\nNome: {self.__nome}\nIdade: {self.__idade}'
 
-
 animal = Animal('Cachorro', 'Markoff', 4)   
 
 print(animal.emitir_som())
