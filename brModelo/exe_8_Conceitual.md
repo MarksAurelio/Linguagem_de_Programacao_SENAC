@@ -3,7 +3,9 @@ Funcionário gerencia um ou mais funcionários
 Funcionário é gerenciado por um ou nenhum funcionáro
 
 Entidades: Funcionário
+
 Auto-Relacionamento: Funcionário pode ser supervisor de outros Funcionários
+
 Funcionário: ID_Funcionário (PK), Nome, Cargo, Supervisor_ID (FK referenciando ID_Funcionário na mesma tabela)
 
 ![Alt text](Conceitual_8.png)
