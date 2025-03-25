@@ -47,7 +47,11 @@
 -- a) Pesquise os itens que foram vendidos sem desconto. As colunas presentes no resultado
 -- da consulta são: ID_NF, ID_ITEM, COD_PROD E VALOR_UNIT.
 
-    select ID_NF, ID_ITEM, COD_PROD, VALOR_UNIT
+    select 
+        ID_NF, 
+        ID_ITEM, 
+        COD_PROD, 
+        VALOR_UNIT
     from vendas
     where desconto is null or desconto = 0;
 
@@ -56,7 +60,11 @@
 -- VENDIDO. OBS: O valor vendido é igual ao VALOR_UNIT -
 -- (VALOR_UNIT*(DESCONTO/100)).
 
-    select ID_NF, ID_ITEM, COD_PROD, VALOR_UNIT, round(VALOR_UNIT - (VALOR_UNIT*(DESCONTO/100)),2) AS VALOR_VENDIDO
+    select 
+        ID_NF, 
+        ID_ITEM, 
+        COD_PROD, 
+        VALOR_UNIT, round(VALOR_UNIT - (VALOR_UNIT*(DESCONTO/100)),2 AS VALOR_VENDIDO
     from vendas
     where desconto > 0;
 
@@ -76,9 +84,9 @@
         ID_ITEM, 
         COD_PROD, 
         VALOR_UNIT, 
-        QUANTIDADE * VALOR_UNIT AS VALOR_TOTAL,
+        QUANTIDADE * VALOR_UNIT as VALOR_TOTAL,
         DESCONTO,
-        round(VALOR_UNIT - (VALOR_UNIT * (DESCONTO / 100)),2) AS VALOR_VENDIDO
+        round(VALOR_UNIT - (VALOR_UNIT * (DESCONTO / 100)),2) as VALOR_VENDIDO
     from vendas;
     
 -- e) Pesquise o valor total das NF e ordene o resultado do maior valor para o menor. As
@@ -88,7 +96,7 @@
 
     select
         ID_NF,
-        sum(QUANTIDADE * VALOR_UNIT) AS VALOR_TOTAL
+        sum(QUANTIDADE * VALOR_UNIT) as VALOR_TOTAL
     from vendas
     group by ID_NF
     order by VALOR_TOTAL desc;
@@ -171,7 +179,58 @@
 
     select
         ID_NF,
-        count(ID_ITEM) AS QTS_ITENS
+        count(ID_ITEM) as QTS_ITENS
     from vendas
     group by ID_NF
     having count(ID_ITEM) > 3;
+
+-- m) Identificação de Itens com e sem Desconto Utilizando IF:
+
+/* Identifique os itens vendidos, indicando se cada item possui ou não desconto. Utilize a função IF para esta distinção.
+As colunas presentes no resultado da consulta são ID_NF (Identificador da Nota Fiscal), ID_ITEM (Identificador do Item),
+COD_PROD (Código do Produto), VALOR_UNIT (Valor Unitário do Produto),
+QUANTIDADE (Quantidade Vendida), STATUS_DESCONTO (Indicação de Desconto) e
+VALOR_VENDIDO (Valor Vendido Considerando o Desconto, se aplicável).*/
+
+    select
+        ID_NF,
+        ID_ITEM,
+        COD_PROD,
+        VALOR_UNIT,
+        QUANTIDADE,
+        IF (DESCONTO > 0, 'COM DESCONTO', 'SEM DESCONTO') as STATUS_DESCONTO,
+        (VALOR_UNIT * QUANTIDADE) as VALOR_VENDIDO
+    from vendas;
+
+-- n) Listar itens e indicar se a quantidade vendida é maior ou igual a 10.
+/*Liste os itens vendidos, indicando se a quantidade vendida de cada item é maior ou igual a 10.
+Utilize a função IF para esta distinção. As colunas presentes no resultado da consulta são ID_NF (Identificador da Nota Fiscal),
+ID_ITEM (Identificador do Item), COD_PROD (Código do Produto), QUANTIDADE (Quantidade Vendida) e QUANTIDADE_STATUS (Status da Quantidade Vendida).
+
+Os status possíveis para quantidade são "Quantidade Alta" (>= 10) e "Quantidade Baixa" (< 10).*/
+
+    select
+        ID_NF,
+        ID_ITEM,
+        COD_PROD,
+        QUANTIDADE,
+        IF (QUANTIDADE >= 10, 'Quantidade Alta', 'Quantidade Baixa') as QUANTIDADE_STATUS
+    from vendas;
+
+-- O) Listar itens e indicar se o desconto aplicado é maior, igual ou menor que a média geral dos descontos.
+
+/*Liste os itens vendidos, indicando se o desconto aplicado em cada item é maior, igual ou menor que a média geral dos descontos.
+Utilize a função IF para esta distinção. As colunas presentes no resultado da consulta são ID_NF (Identificador da Nota Fiscal),
+ID_ITEM (Identificador do Item), COD_PROD (Código do Produto), DESCONTO (Percentual de Desconto) e DESCONTO_STATUS (Status do Desconto).
+
+Os status possíveis para o desconto são "Desconto Acima da Média", "Desconto Médio" e "Desconto Abaixo da Média". */
+
+    select
+        ID_NF,
+        ID_ITEM,
+        COD_PROD,
+        DESCONTO,
+        IF(DESCONTO > (select avg(DESCONTO)from vendas), 'Desconto Acima da Média',
+        IF(DESCONTO = (select avg(DESCONTO)from vendas), 'Desconto Médio',
+        IF(DESCONTO < (select avg(DESCONTO)from vendas), 'Desconto Abaixo da Média', 'Sem desconto'))) as DESCONTO_STATUS
+    from vendas;
