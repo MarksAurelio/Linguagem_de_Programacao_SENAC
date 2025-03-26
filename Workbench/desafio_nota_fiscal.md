@@ -232,5 +232,5 @@ Os status possíveis para o desconto são "Desconto Acima da Média", "Desconto 
         DESCONTO,
         IF(DESCONTO > (select avg(DESCONTO)from vendas), 'Desconto Acima da Média',
         IF(DESCONTO = (select avg(DESCONTO)from vendas), 'Desconto Médio',
-        IF(DESCONTO < (select avg(DESCONTO)from vendas), 'Desconto Abaixo da Média', 'Sem desconto'))) as DESCONTO_STATUS
+        IF(DESCONTO < (select avg(DESCONTO)from vendas) and DESCONTO > 0, 'Desconto Abaixo da Média', 'Sem desconto'))) as DESCONTO_STATUS
     from vendas;
