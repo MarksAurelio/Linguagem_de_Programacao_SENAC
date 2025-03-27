@@ -145,7 +145,7 @@ INSIRA VALORES PARA TODOS OS ALUNOS EM TODAS AS DISCIPLINAS
         ('WEB', 1, 192011, 2015, '07H-08H'),
         ('ENG', 1, 122135, 2015, '10H-11H');
 
-    insert into historico(MAT, COD_DISC, COD_TURMA, COD_PROF, ANO, frequencia, nota) values
+    insert into historico(MAT, COD_DISC, COD_TURMA, COD_PROF, ano, frequencia, nota) values
         (2015010101,'BD',1,212131,2015,5,9.00),
         (2015010101,'ENG',1,122135,2015,1,10.00),
         (2015010101,'POO',1,192011,2015,4,8.00),
@@ -174,10 +174,9 @@ INSIRA VALORES PARA TODOS OS ALUNOS EM TODAS AS DISCIPLINAS
 /*a) Encontre a MAT dos alunos com nota em BD em 2015 menor que 5 (obs: BD =
 código da disciplina).*/
 
-    SELECT 
+    select
         MAT
-    from historico h
-    join disciplinas d on h.COD_DISC = d.COD_DISC
+    from historico h join disciplinas d on h.COD_DISC = d.COD_DISC
     where d.COD_DISC = 'BD'
     and h.ano = 2015
     and h.nota < 5;
@@ -188,8 +187,7 @@ em 2015.*/
     select 
         MAT,
         round(avg(h.nota)) as MEDIA_NOTAS
-    from historico h
-    join disciplinas d on h.COD_DISC = d.COD_DISC
+    from historico h join disciplinas d on h.COD_DISC = d.COD_DISC
     where d.COD_DISC = 'POO'
     and h.ano = 2015
     group by h.MAT;
@@ -200,8 +198,7 @@ em 2015 e que esta média seja superior a 6.*/
     select 
         MAT,
         round(avg(h.nota)) as MEDIA_NOTAS
-    from historico h
-    join disciplinas d on h.COD_DISC = d.COD_DISC
+    from historico h join disciplinas d on h.COD_DISC = d.COD_DISC
     where d.COD_DISC = 'POO'
     and h.ano = 2015
     and nota > 6
