@@ -76,17 +76,70 @@ order by CIDADE_ALUNO, avg(nota) desc;
 /*6. Encontre os professores que ministraram disciplinas com carga horária superior a 70
 horas, mostrando o nome do professor e o nome da disciplina.*/
 
+select 
+	p.nome as NOME_PROF,
+    d.nome_disc as NOME_DISC,
+    sum(d.carga_hor) as TOTAL_CARGA_HOR
+from historico h
+join turma t on h.COD_DISC = t.COD_DISC
+join disciplinas d on t.COD_DISC = d.COD_DISC
+join professores p ON t.COD_PROF = p.COD_PROF
+group by NOME_PROF, NOME_DISC
+having sum(d.carga_hor) > 70;
+
 /*7. Liste todos os alunos que tiveram nota acima da média em Banco de Dados,
 mostrando o nome do aluno e a nota.*/
+
+select 
+    a.nome as NOME_ALUNO,
+    d.nome_disc as NOME_DISC,
+    round(avg(h.nota)) as MEDIA_NOTA
+from historico h
+join alunos a on h.MAT = a.MAT
+join disciplinas d on h.COD_DISC = d.COD_DISC
+where d.COD_DISC = 'BD'
+group by NOME_ALUNO, NOME_DISC;
 
 /*8. Mostre a quantidade de alunos por professor em 2015, ordenado pela quantidade em
 ordem decrescente.*/
 
+select
+    p.nome as NOME_PROF,
+    count(a.MAT) as QTD_ALUNOS
+from alunos a
+join historico h on a.MAT = h.MAT
+join professores p on h.COD_PROF = p.COD_PROF
+join disciplinas d on h.COD_DISC = d.COD_DISC
+join turma t on h.COD_TURMA = t.COD_TURMA
+where h.ano = 2015
+group by 1
+order by QTD_ALUNOS desc;
+
 /*9. Encontre os alunos que cursaram mais de uma disciplina com o mesmo professor,
 mostrando o nome do aluno, nome do professor e a quantidade de disciplinas.*/
 
+select
+	a.nome as NOME_ALUNO,
+    p.nome as NOME_PROF,
+    count(h.COD_DISC) as QTD_DISC
+from historico h
+join alunos a on h.MAT = a.MAT
+join turma t on h.COD_DISC = t.COD_DISC
+join disciplinas d on h.COD_DISC = d.COD_DISC
+join professores p on h.COD_PROF = p.COD_PROF
+group by NOME_ALUNO, NOME_PROF
+having count(d.COD_DISC) > 1;
+
 /*10. Liste as disciplinas que tiveram alunos de todas as cidades representadas no banco
 de dados, mostrando o nome da disciplina.*/
+
+select
+	d.nome_disc as NOME_DISC,
+    a.cidade as CIDADE_ALUNOS
+from historico h
+join alunos a on h.MAT = a.MAT
+join disciplinas d on h.COD_DISC = d.COD_DISC
+group by 1, 2;
 
 /*Observações:
 • Todas as consultas devem utilizar INNER JOIN para relacionar as tabelas.
