@@ -238,6 +238,17 @@ formadas.*/
     select
         p.nome as NOME_PROF,
         d.nome_disc as NOME_DISC
+    from professores p
+    left join historico h on h.COD_PROF = p.COD_PROF
+    left join disciplinas d on h.COD_DISC = d.COD_DISC
+    union
+    select
+        p.nome as NOME_PROF,
+        d.nome_disc as NOME_DISC
+    from professores p
+    right join historico h on h.COD_PROF = p.COD_PROF
+    right join disciplinas d on h.COD_DISC = d.COD_DISC
+    group by 1, 2;
 
 /*Como usar:
 1. Para soluções, utilize a estrutura do banco "Universidade" definida
