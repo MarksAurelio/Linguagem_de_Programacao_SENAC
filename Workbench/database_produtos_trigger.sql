@@ -57,9 +57,18 @@ Testando os valores do estoque
         INSERT INTO ItensVenda VALUES (1, '002',3);
         INSERT INTO ItensVenda VALUES (1, '002',1);
         INSERT INTO ItensVenda VALUES (1, '003',5);
-3. Completar a TRIGGER
+        
+/*3. Completar a TRIGGER
 Criar um Trigger que ao inserir ou excluir um registro
 da tabela ItensVenda, o estoque do produto referenciado
-deve ser alterado na tabela Produtos
+deve ser alterado na tabela Produtos*/
 
-        
+		DELIMITER $
+        CREATE TRIGGER Tgr_ItensVenda_Delete AFTER DELETE
+        ON ItensVenda
+        FOR EACH ROW
+        BEGIN
+        UPDATE Produtos SET Estoque = Estoque + OLD.Quantidade
+        WHERE Codigo = OLD.Cod_Produto;
+        END$
+        DELIMITER ;
