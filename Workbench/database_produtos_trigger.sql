@@ -72,3 +72,4 @@ deve ser alterado na tabela Produtos*/
         WHERE Codigo = OLD.Cod_Produto;
         END$
         DELIMITER ;
+        
