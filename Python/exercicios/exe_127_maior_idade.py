@@ -10,7 +10,6 @@ def maior_idade():
         mensagem = 'Menor de idade'
     label_verificar_idade.config(text=mensagem)
     
-
 janela = tk.Tk()
 janela.title('Verificador de idade')
 

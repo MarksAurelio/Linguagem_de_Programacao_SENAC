@@ -28,7 +28,7 @@ print(", ".join(lista))
 # split(): divide a string em uma lista de substrings usando um separador
 print(texto.split(", "))
 
-# len(): retorna o comprimento da string
+# len(): retorna a quantidade de caracteres de uma string
 print(len(texto))
 
 # type(): retorna o tipo de dado de uma variável
