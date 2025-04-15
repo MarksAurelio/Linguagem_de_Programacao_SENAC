@@ -17,7 +17,7 @@ def qual_sabor():
     if resposta and resposta != ' ':
         resultado.config(text=f'Você escolheu: {resposta}')
     else:
-        resultado.config(text='Você não escolheu nenhuma opção.')
+        resultado.config(text='Você não escolheu nenhuma opção.', fg='red')
 
 janela = tk.Tk()
 janela.title('Sabor Pizza')
