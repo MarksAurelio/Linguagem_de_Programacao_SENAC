@@ -1,5 +1,5 @@
 import tkinter as tk
-from prototipo_funcoes import App
+from prototipo_interface_grafica import App
 
 if __name__ == "__main__":
     janela = tk.Tk()
