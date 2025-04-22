@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
-from prototipo_database_operations import criar_tabela_alunos, cadastrar_aluno, listar_alunos, buscar_aluno, atualizar_aluno, excluir_aluno_db
+from prototipo_database_operacoes import criar_tabela_alunos, cadastrar_aluno, listar_alunos, buscar_aluno, atualizar_aluno, excluir_aluno_db
 
-class StudentManagementApp:
+class App:
     def __init__(self, janela):
         self.janela = janela
         self.janela.title('Cadastro de Alunos')
@@ -158,6 +158,6 @@ class StudentManagementApp:
 
 if __name__ == "__main__":
     janela = tk.Tk()
-    app = StudentManagementApp(janela)
+    app = App(janela)
     janela.mainloop()
     

@@ -1,8 +1,8 @@
 import tkinter as tk
-from prototipo_student_management_ui import StudentManagementApp
+from prototipo_funcoes import App
 
 if __name__ == "__main__":
     janela = tk.Tk()
-    app = StudentManagementApp(janela)
+    app = App(janela)
     janela.mainloop()
     
