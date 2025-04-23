@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from prototipo_funcoes import criar_tabela_alunos, cadastrar_aluno, listar_alunos, buscar_aluno, atualizar_aluno, excluir_aluno_db
+from prototipo_funcoes import criar_tabela_alunos, cadastrar_aluno, listar_alunos, buscar_aluno, atualizar_aluno, excluir_aluno
 
 class App:
     def __init__(self, janela):
@@ -9,7 +9,7 @@ class App:
         self.janela.geometry('800x650')
 
         self.entrada_curso = tk.StringVar()
-        self.lista_de_alunos_db = []
+        self.lista_de_alunos = []
 
         self.criar_widgets()
         criar_tabela_alunos()
@@ -73,7 +73,7 @@ class App:
     def atualizar_lista_alunos(self):
         self.lista_alunos_listbox.delete(0, tk.END)
         alunos = listar_alunos()
-        self.lista_de_alunos_db = alunos
+        self.lista_de_alunos = alunos
         for aluno in alunos:
             aluno_info_str = f'Matrícula: {aluno["matricula"]}, Nome: {aluno["nome"]}, Idade: {aluno["idade"]}, Curso: {aluno["curso"]}'
             self.lista_alunos_listbox.insert(tk.END, aluno_info_str)
@@ -82,9 +82,12 @@ class App:
         termo_busca = self.entrada_busca.get()
         alunos_encontrados = buscar_aluno(termo_busca)
         self.lista_alunos_listbox.delete(0, tk.END)
-        for aluno in alunos_encontrados:
-            aluno_info_str = f'Matrícula: {aluno["matricula"]}, Nome: {aluno["nome"]}, Idade: {aluno["idade"]}, Curso: {aluno["curso"]}'
-            self.lista_alunos_listbox.insert(tk.END, aluno_info_str)
+        if alunos_encontrados:
+            for aluno in alunos_encontrados:
+                aluno_info_str = f'Matrícula: {aluno["matricula"]}, Nome: {aluno["nome"]}, Idade: {aluno["idade"]}, Curso: {aluno["curso"]}'
+                self.lista_alunos_listbox.insert(tk.END, aluno_info_str)
+        else:
+            self.resultado.config(text=f'Nenhum aluno encontrado com o termo: "{termo_busca}"', fg='red')
 
     def carregar_para_edicao(self):
         selecionado_indices = self.lista_alunos_listbox.curselection()
@@ -93,7 +96,7 @@ class App:
             return
 
         indice_selecionado = selecionado_indices[0]
-        aluno_selecionado = self.lista_de_alunos_db[indice_selecionado]
+        aluno_selecionado = self.lista_de_alunos[indice_selecionado]
 
         janela_edicao = tk.Toplevel(self.janela)
         janela_edicao.title('Editar Informações do Aluno')
@@ -146,11 +149,11 @@ class App:
             return
 
         indice_selecionado = selecionado_indices[0]
-        aluno_excluir = self.lista_de_alunos_db[indice_selecionado]
+        aluno_excluir = self.lista_de_alunos[indice_selecionado]
 
         confirmacao = messagebox.askyesno('Confirmação', f'Tem certeza que deseja excluir o cadastro de {aluno_excluir["nome"]} (Matrícula: {aluno_excluir["matricula"]})?')
         if confirmacao:
-            if excluir_aluno_db(aluno_excluir['matricula']):
+            if excluir_aluno(aluno_excluir['matricula']):
                 self.atualizar_lista_alunos()
                 self.resultado.config(text=f'Cadastro de {aluno_excluir["nome"]} excluído com sucesso!', fg='green')
             else:

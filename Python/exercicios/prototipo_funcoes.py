@@ -101,7 +101,7 @@ def atualizar_aluno(matricula, novo_nome, nova_idade, novo_curso):
                 meu_db.close()
     return False
 
-def excluir_aluno_db(matricula):
+def excluir_aluno(matricula):
     meu_db = conectar_db()
     if meu_db:
         meu_cursor = meu_db.cursor()

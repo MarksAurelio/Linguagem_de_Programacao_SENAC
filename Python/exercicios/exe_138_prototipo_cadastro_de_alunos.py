@@ -3,27 +3,17 @@ from tkinter import messagebox
 import mysql.connector
 from mysql.connector import Error
 
-<<<<<<< HEAD
-db_host = '****' # informações de host do banco de dados
-db_user = '****' # nome de usuário do banco de dados
-db_password = '****' # senha do banco de dados
-db_database= '****' # nome do banco de dados
-=======
 db_host = 'localhost' # informações de host do banco de dados
 db_user = 'root' # nome de usuário do banco de dados
 db_password = 'senac' # senha do banco de dados
 db_port = 3307
 db_database= 'app' # nome do banco de dados
->>>>>>> 7933f2102805762ae6e203d5115482fa2d0d49cb
 
 def conectar_db():
     # tenta estabelecer uma conexão com o banco de dados mysql.
     try:
-<<<<<<< HEAD
-        meu_db = mysql.connector.connect(host=db_host, user=db_user, password=db_password, database=db_database)
-=======
         meu_db = mysql.connector.connect(host=db_host, user=db_user, password=db_password, port=db_port, database=db_database)
->>>>>>> 7933f2102805762ae6e203d5115482fa2d0d49cb
+
         return meu_db # retorna o objeto de conexão se a conexão for bem-sucedida.
     except Error as e:
         messagebox.showerror('Erro de Banco de Dados', f'Erro ao conectar ao MySQL: {e}') # exibe uma janela de erro com a mensagem de falha na conexão.
@@ -105,10 +95,9 @@ def atualizar_lista_alunos():
 def buscar_aluno():
     # busca alunos no banco de dados cujo nome contenha o termo de busca inserido.
     termo_busca = entrada_busca.get().lower() # obtém o texto de busca do campo de entrada e o converte para minúsculas.
-<<<<<<< HEAD
-=======
+
     print(f"Termo de busca: '{termo_busca}'")
->>>>>>> 7933f2102805762ae6e203d5115482fa2d0d49cb
+
     lista_alunos_listbox.delete(0, tk.END) # remove todos os itens da listbox.
     meu_db = conectar_db()
     if meu_db:
