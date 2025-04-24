@@ -116,20 +116,20 @@ class App:
         entrada_idade_edicao.pack(pady=5)
 
         tk.Label(janela_edicao, text='Curso:').pack(pady=5)
-        entrada_curso_edicao_var = tk.StringVar(janela_edicao)
+        entrada_curso_edicao = tk.StringVar(janela_edicao)
         cursos = ['Engenharia de Software', 'Ciência da Computação', 'Programação de Sistemas', 'Sistemas de Informação']
-        entrada_curso_edicao_var.set(aluno_selecionado['curso'])
-        opcoes_curso_edicao = tk.OptionMenu(janela_edicao, entrada_curso_edicao_var, *cursos)
+        entrada_curso_edicao.set(aluno_selecionado['curso'])
+        opcoes_curso_edicao = tk.OptionMenu(janela_edicao, entrada_curso_edicao, *cursos)
         opcoes_curso_edicao.config(width=37)
         opcoes_curso_edicao.pack(pady=5)
 
         def salvar_edicao():
             novo_nome = entrada_nome_edicao.get()
             nova_idade = entrada_idade_edicao.get()
-            novo_curso = entrada_curso_edicao_var.get()
+            novo_curso = entrada_curso_edicao.get()
             matricula_aluno = aluno_selecionado['matricula']
 
-            if not novo_nome or not nova_idade or not novo_curso == 'Selecione um curso':
+            if not novo_nome or not nova_idade or not novo_curso:
                 messagebox.showerror('Erro', 'Por favor, preencha todos os campos.')
                 return
 

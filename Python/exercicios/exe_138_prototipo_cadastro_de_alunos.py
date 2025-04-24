@@ -158,7 +158,7 @@ def carregar_para_edicao():
         novo_curso = entrada_curso_edicao_var.get() # obtém o curso selecionado no menu de opções de edição.
         matricula_aluno = aluno_selecionado['matricula'] # obtém a matrícula do aluno que está sendo editado.
 
-        if not novo_nome or not nova_idade or not novo_curso == 'Selecione um curso':
+        if not novo_nome or not nova_idade or not novo_curso:
             messagebox.showerror('Erro', 'Por favor, preencha todos os campos.') # exibe uma mensagem de erro se algum campo estiver vazio.
             return # interrompe a função se houver campos vazios.
 
