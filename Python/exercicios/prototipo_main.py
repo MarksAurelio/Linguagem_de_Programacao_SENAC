@@ -5,4 +5,3 @@ if __name__ == "__main__":
     janela = tk.Tk()
     app = App(janela)
     janela.mainloop()
-    
